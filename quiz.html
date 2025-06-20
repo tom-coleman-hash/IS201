@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Which Skunk Works Jet Are You?</title>
+  <style>
+    body {
+      font-family: 'Courier New', monospace;
+      background-color: #101820;
+      color: #f2f2f2;
+      text-align: center;
+      padding: 2rem;
+    }
+    h1 {
+      color: #FFD700;
+    }
+    .question {
+      margin: 2rem 0;
+    }
+    button {
+      margin: 0.5rem;
+      padding: 0.5rem 1rem;
+      border: none;
+      background-color: #FFD700;
+      color: #101820;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    #result {
+      margin-top: 2rem;
+      font-size: 1.5rem;
+      color: #00FF9F;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Which Skunk Works Jet Are You?</h1>
+
+  <div class="question" id="q1">
+    <p>1️⃣ Do you like being unseen?</p>
+    <button onclick="answer(1, 'yes')">Yes</button>
+    <button onclick="answer(1, 'no')">No</button>
+  </div>
+
+  <div class="question" id="q2" style="display:none;">
+    <p>2️⃣ Do you walk fast or glide slow?</p>
+    <button onclick="answer(2, 'fast')">Fast</button>
+    <button onclick="answer(2, 'slow')">Slow</button>
+  </div>
+
+  <div class="question" id="q3" style="display:none;">
+    <p>3️⃣ Are you a spring chicken or an old rooster?</p>
+    <button onclick="answer(3, 'young')">Spring Chicken</button>
+    <button onclick="answer(3, 'old')">Old Rooster</button>
+  </div>
+
+  <div id="result"></div>
+
+  <script>
+    let answers = {};
+
+    function answer(questionNumber, choice) {
+      answers[`q${questionNumber}`] = choice;
+      document.getElementById(`q${questionNumber}`).style.display = "none";
+
+      if (questionNumber < 3) {
+        document.getElementById(`q${questionNumber + 1}`).style.display = "block";
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      const { q1, q2, q3 } = answers;
+
+      let jet = "";
+      if (q1 === 'yes' && q2 === 'slow' && q3 === 'old') {
+        jet = "F-117 Nighthawk 🛸 — Silent, weird-looking, and stealthy.";
+      } else if (q1 === 'yes' && q2 === 'fast' && q3 === 'old') {
+        jet = "SR-71 Blackbird 🖤 — Fast, high-flying, and legendary.";
+      } else if (q1 === 'yes' && q3 === 'young') {
+        jet = "F-22 Raptor 🦅 — Stealthy, agile, and modern.";
+      } else {
+        jet = "U-2 Dragon Lady 🛫 — High-flying, classic, and mysterious.";
+      }
+
+      document.getElementById("result").innerText = `You are the ${jet}`;
+    }
+  </script>
+
+</body>
+</html>
